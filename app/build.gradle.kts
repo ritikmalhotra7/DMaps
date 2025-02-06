@@ -89,6 +89,8 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     //Data Store
     implementation(libs.data.store)
+    //play-services-location
+    implementation(libs.play.services.location)
 
 
     testImplementation(libs.junit)
