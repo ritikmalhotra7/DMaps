@@ -17,9 +17,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.application.dmaps.R
+import com.application.dmaps.feat_map.data.dto.group.GroupUser
 
 @Composable
-fun ConnectedPeopleVertical(modifier: Modifier = Modifier) {
+fun ConnectedPeopleVertical(user: GroupUser, modifier: Modifier = Modifier) {
     Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
         Image(
             painter = painterResource(id = R.drawable.ic_launcher_background),
@@ -31,7 +32,7 @@ fun ConnectedPeopleVertical(modifier: Modifier = Modifier) {
         )
         Column() {
             Text(
-                text = "Lorem ipsum dolor sit amet",
+                text = user.username,
                 modifier = Modifier
                     .padding(horizontal = 8.dp, vertical = 0.dp)
                     .fillMaxWidth(),
@@ -39,7 +40,7 @@ fun ConnectedPeopleVertical(modifier: Modifier = Modifier) {
                 fontWeight = FontWeight.SemiBold
             )
             Text(
-                text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                text = "(${user.location.toString()})",
                 modifier = Modifier
                     .padding(horizontal = 8.dp, vertical = 0.dp)
                     .fillMaxWidth(),
@@ -53,7 +54,7 @@ fun ConnectedPeopleVertical(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ConnectedPeopleHorizontal(modifier: Modifier = Modifier) {
+fun ConnectedPeopleHorizontal(user:GroupUser, modifier: Modifier = Modifier) {
     Image(
         painter = painterResource(id = R.drawable.ic_launcher_background),
         contentDescription = "",

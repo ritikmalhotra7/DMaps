@@ -1,5 +1,6 @@
 package com.application.dmaps.feat_auth.domian.usecases
 
+import com.application.dmaps.feat_auth.data.dtos.login.LoginData
 import com.application.dmaps.feat_core.utils.result.ResultState
 import com.application.dmaps.feat_auth.data.dtos.login.LoginRequestDto
 import com.application.dmaps.feat_auth.data.dtos.login.LoginResponseDto
@@ -8,7 +9,7 @@ import com.application.dmaps.feat_auth.utils.LoginError
 import javax.inject.Inject
 
 class LoginUser @Inject constructor(private val repo: AuthRepository) {
-    suspend operator fun invoke(request:LoginRequestDto): ResultState<LoginResponseDto, LoginError> {
+    suspend operator fun invoke(request:LoginRequestDto): ResultState<LoginData, LoginError> {
         if(request.username.isBlank() || request.username.isEmpty()){
             return ResultState.Error(LoginError.EmptyUsername)
         }

@@ -1,5 +1,6 @@
 package com.application.dmaps.feat_auth.data.repository
 
+import com.application.dmaps.feat_auth.data.dtos.login.LoginData
 import com.application.dmaps.feat_core.data.remote.AppApi
 import com.application.dmaps.feat_core.utils.result.ResultState
 import com.application.dmaps.feat_auth.data.dtos.login.LoginRequestDto
@@ -9,12 +10,12 @@ import com.application.dmaps.feat_auth.utils.LoginError
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(private val api:AppApi): AuthRepository {
-    override suspend fun login(request: LoginRequestDto): ResultState<LoginResponseDto, LoginError> {
+    override suspend fun login(request: LoginRequestDto): ResultState<LoginData, LoginError> {
         return try{
             val data = api.login(request)
             if(data.isSuccessful){
                 if(data.body()!!.success){
-                    ResultState.Success(data.body()!!)
+                    ResultState.Success(data.body()!!.data!!)
                 }else{
                     ResultState.Error(LoginError.CustomError(data.body()!!.message?:""))
                 }

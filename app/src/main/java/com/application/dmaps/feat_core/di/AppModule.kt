@@ -6,9 +6,12 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.application.dmaps.feat_auth.utils.AuthConstants.AUTHENTICATION_TOKEN
+import com.application.dmaps.feat_core.data.SocketManager
 import com.application.dmaps.feat_core.data.remote.AppApi
 import com.application.dmaps.feat_core.data.remote.BASE_URL
+import com.application.dmaps.feat_core.data.remote.SOCKET_URL
 import com.application.dmaps.feat_core.utils.Constants.DATA_STORE_NAME
+import com.google.android.gms.location.FusedLocationProviderClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,8 +33,22 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideFusedLocationProviderClient(@ApplicationContext ctx:Context):FusedLocationProviderClient = FusedLocationProviderClient(ctx)
+
+    @Provides
+    @Singleton
     fun provideDatastore(@ApplicationContext context: Context): DataStore<Preferences> {
         return context.dataStore
+    }
+
+    @Provides
+    @Singleton
+    fun providesSocketManager(dataStore: DataStore<Preferences>):SocketManager{
+        val token:String = runBlocking {
+            dataStore.data.first().asMap()
+                .getOrDefault(stringPreferencesKey(AUTHENTICATION_TOKEN), "").toString()
+        }
+        return SocketManager(SOCKET_URL,token)
     }
 
     @Provides

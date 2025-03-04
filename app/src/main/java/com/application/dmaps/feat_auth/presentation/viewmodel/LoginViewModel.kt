@@ -69,7 +69,7 @@ class LoginViewModel @Inject constructor(
                     is ResultState.Success -> {
                         if (putPreferenceUsecase(
                                 stringPreferencesKey(AUTHENTICATION_TOKEN),
-                                state.data.data.token
+                                state.data.token
                             )
                         ) _eventFlow.emit(LoginScreenOutgoingEvent.LoginSuccess)
                         else _eventFlow.emit(LoginScreenOutgoingEvent.ShowSnackBar(DataStoreError.UnexpectedError.message))

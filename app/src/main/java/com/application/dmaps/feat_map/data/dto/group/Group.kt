@@ -6,5 +6,5 @@ data class Group(
     var users:List<GroupUser>,
     val destination:Location? = null,
     val createdAt:String,
-    val createdBy:String
+    val host:String
 )

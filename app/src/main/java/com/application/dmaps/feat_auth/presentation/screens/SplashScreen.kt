@@ -49,7 +49,6 @@ fun SplashScreen(navController:NavController) {
     LaunchedEffect(key1 = true) {
         isVisible.value = true
         viewModel.isLoggedIn.collectLatest {
-            Log.d("taget",it.toString())
             isVisible.value = false
             navController.navigate(
                 if (!it.isNullOrBlank()) Screen.MapHome.route
