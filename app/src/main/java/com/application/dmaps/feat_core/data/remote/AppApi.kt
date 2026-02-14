@@ -38,7 +38,7 @@ interface AppApi {
     suspend fun getGroup(@Path("groupId") groupId: String): Response<ResponseWrapperDto<Group>>
 
     @PUT("join-group/{groupCode}")
-    suspend fun joinGroup(@Path("groupCode") groupCode:String):Response<ResponseWrapperDto<Unit?>>
+    suspend fun joinGroup(@Path("groupCode") groupCode:String):Response<ResponseWrapperDto<Group>>
 
     @PUT("update-destination/{groupId}")
     suspend fun updateDestination(@Path("groupId") groupId:String,@Body destination:Location):Response<ResponseWrapperDto<Unit?>>
@@ -46,7 +46,7 @@ interface AppApi {
     @PUT("remove-users/{groupId}")
     suspend fun removeUser(@Path("groupId") groupId:String,@Body request: RemoveUserRequest):Response<ResponseWrapperDto<Unit?>>
 
-    @PUT("remove-current-user/{groupId}")
+    @PUT("remove-user/{groupId}")
     suspend fun removeCurrentUser(@Path("groupId") groupId:String):Response<ResponseWrapperDto<Unit?>>
 
     @DELETE("close/{groupId}")

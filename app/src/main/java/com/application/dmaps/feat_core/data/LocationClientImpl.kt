@@ -8,6 +8,7 @@ import android.location.Location
 import android.location.LocationManager
 import android.os.Looper
 import androidx.compose.ui.platform.LocalContext
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.application.dmaps.feat_core.domain.LocationClient
 import com.application.dmaps.feat_core.utils.logd
@@ -26,7 +27,6 @@ class LocationClientImpl @Inject constructor(
     @ApplicationContext val context: Context,
     val client: FusedLocationProviderClient
 ) : LocationClient {
-    @SuppressLint("MissingPermission")
     override fun getLocationUpdates(interval: Long): Flow<Location> {
         return callbackFlow {
             if(!hasLocationPermissions()){
@@ -54,6 +54,14 @@ class LocationClientImpl @Inject constructor(
                 }
             }
 
+            if (ActivityCompat.checkSelfPermission(
+                    context,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    context,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+            ) { }
             client.requestLocationUpdates(
                 request,
                 locationCallback,

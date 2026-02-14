@@ -20,7 +20,7 @@ class AuthRepositoryImpl @Inject constructor(private val api:AppApi): AuthReposi
                     ResultState.Error(LoginError.CustomError(data.body()!!.message?:""))
                 }
             }else{
-                ResultState.Error(LoginError.CustomError(data.body()!!.message?:""))
+                ResultState.Error(LoginError.CustomError(data.message()?:""))
             }
         }catch(e:Exception){
             e.printStackTrace()

@@ -18,7 +18,7 @@ class ProfileRepositoryImpl @Inject constructor(private val api:AppApi):ProfileR
                     ResultState.Error(ProfileError.CustomError(data.body()!!.message?:""))
                 }
             }else{
-                ResultState.Error(ProfileError.CustomError(data.body()!!.message?:""))
+                ResultState.Error(ProfileError.CustomError(data.message()))
             }
         }catch(e:Exception){
             e.printStackTrace()

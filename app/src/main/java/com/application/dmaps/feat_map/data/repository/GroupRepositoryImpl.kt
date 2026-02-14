@@ -1,6 +1,7 @@
 package com.application.dmaps.feat_map.data.repository
 
 import com.application.dmaps.feat_auth.utils.LoginError
+import com.application.dmaps.feat_core.data.dtos.ResponseWrapperDto
 import com.application.dmaps.feat_core.data.remote.AppApi
 import com.application.dmaps.feat_core.utils.error.CustomError
 import com.application.dmaps.feat_core.utils.error.ResultError
@@ -13,12 +14,12 @@ import com.application.dmaps.feat_map.utils.GroupError
 import javax.inject.Inject
 
 class GroupRepositoryImpl @Inject constructor(private val api:AppApi):GroupRepository {
-    override suspend fun createGroup(): ResultState<Group, ResultError> {
+    override suspend fun createGroup(): ResultState<ResponseWrapperDto<Group>, ResultError> {
         return try{
             val data = api.createGroup()
             if(data.isSuccessful){
                 if(data.body()!!.success){
-                    ResultState.Success(data.body()!!.data!!)
+                    ResultState.Success(data.body()!!)
                 }else{
                     ResultState.Error(CustomError.Error(data.body()!!.message))
                 }
@@ -49,12 +50,12 @@ class GroupRepositoryImpl @Inject constructor(private val api:AppApi):GroupRepos
         }
     }
 
-    override suspend fun joinGroup(groupCode: String): ResultState<Unit?, ResultError> {
+    override suspend fun joinGroup(groupCode: String): ResultState<Group, ResultError> {
         return try{
             val data = api.joinGroup(groupCode)
             if(data.isSuccessful){
                 if(data.body()!!.success){
-                    ResultState.Success(data.body()!!.data)
+                    ResultState.Success(data.body()!!.data!!)
                 }else{
                     ResultState.Error(CustomError.Error(data.body()!!.message))
                 }

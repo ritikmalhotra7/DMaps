@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
@@ -27,6 +28,7 @@ import com.application.dmaps.feat_core.presentation.services.LocationService
 import com.application.dmaps.feat_core.utils.Constants
 import com.application.dmaps.feat_core.utils.snackbar.ObserveAsEvents
 import com.application.dmaps.feat_core.utils.snackbar.SnackbarController
+import com.application.dmaps.feat_map.presentation.viewmodel.MapHomeViewModel
 import com.application.dmaps.ui.theme.DMapsTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch

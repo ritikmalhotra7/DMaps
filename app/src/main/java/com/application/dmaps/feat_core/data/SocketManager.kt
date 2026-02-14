@@ -31,13 +31,13 @@ class SocketManager(private val socketUrl: String, private val token: String) {
         socket?.close(1000, "Closing Web Socket")
     }
 
-    fun onGroupConnected(groupCode: String) {
+    fun onGroupConnected(groupId: String) {
         val request = Request.Builder()
             .addHeader("Authorization","Bearer $token")
-            .url("${socketUrl}/connect-group/$groupCode")
+            .url("${socketUrl}/connect-group/$groupId")
             .build()
-        socket = client.newWebSocket(request, object : WebSocketListener() {
 
+        socket = client.newWebSocket(request, object : WebSocketListener() {
             override fun onMessage(webSocket: WebSocket, text: String) {
                 super.onMessage(webSocket, text)
                 val data = Gson().fromJson(text, Group::class.java)

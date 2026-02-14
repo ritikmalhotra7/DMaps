@@ -1,6 +1,8 @@
 package com.application.dmaps.feat_core.utils
 
-interface Event
-sealed interface CommonEvent {
+import com.google.android.gms.common.internal.service.Common
 
+interface Event
+sealed interface CommonEvent:Event {
+    data class IsLoading(val isLoading:Boolean):CommonEvent
 }

@@ -42,7 +42,6 @@ class LocationService : Service() {
     @Inject
     lateinit var socketManager: SocketManager
 
-    private lateinit var notification: NotificationCompat.Builder
     override fun onBind(p0: Intent?): IBinder? {
         return null
     }
@@ -50,7 +49,7 @@ class LocationService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         when (intent?.action) {
             Constants.LOCATION_TRACKING_START -> {
-                val groupCode: String = intent.getStringExtra(Constants.GROUP_CODE_KEY) ?: ""
+                val groupCode: String = intent.getStringExtra(Constants.GROUP_ID_KEY) ?: ""
                 isRunning = true
                 startLocationTracking(groupCode)
             }
@@ -64,7 +63,7 @@ class LocationService : Service() {
     }
 
     private fun startLocationTracking(groupCode: String) {
-        notification = NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
+        val notification = NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
             .setContentTitle(this.getString(R.string.app_name) + "Started Tracking your Location")
             .setSmallIcon(R.drawable.ic_launcher_background)
             .setOngoing(true)

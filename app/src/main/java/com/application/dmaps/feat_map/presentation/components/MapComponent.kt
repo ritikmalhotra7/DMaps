@@ -22,11 +22,11 @@ import com.google.maps.android.compose.rememberCameraPositionState
 import javax.inject.Inject
 
 @Composable
-fun MapComp(cameraPositionState:CameraPositionState, modifier:Modifier = Modifier){
+fun MapComp(cameraPositionState:CameraPositionState, isPermissionGiven:Boolean, modifier:Modifier = Modifier){
     GoogleMap(
         modifier = modifier,
         cameraPositionState = cameraPositionState,
-        properties = MapProperties(mapType = MapType.NORMAL, isMyLocationEnabled = true),
+        properties = MapProperties(mapType = MapType.NORMAL, isMyLocationEnabled = isPermissionGiven),
         uiSettings = MapUiSettings(zoomControlsEnabled = false, myLocationButtonEnabled = true)
     )
 }
